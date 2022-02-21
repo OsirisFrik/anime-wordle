@@ -5,6 +5,7 @@ export default class GameBoard extends HTMLElement {
   currentCol: number = 0
   currentRowValue: string = ''
   rows: { el: HTMLDivElement, cols: HTMLDivElement[] }[] = []
+  gameEnded: boolean = false
   
   constructor(word: string) {
     super()
@@ -51,6 +52,8 @@ export default class GameBoard extends HTMLElement {
   onKeyPress(e: KeyboardEvent) {
     e.preventDefault()
 
+    if (this.gameEnded) return
+
     if (e.code.match(/Key[A-Z]/g)) return this.addLetter(e.key)
     if (e.code === 'Backspace') return this.erase()
     if (
@@ -60,6 +63,8 @@ export default class GameBoard extends HTMLElement {
   }
 
   onKeyBtnPress(key: string) {
+    if (this.gameEnded) return
+    
     if (key === 'backspace') return this.erase()
     if (key === 'send') return this.send()
     if (key.match(/[a-zA-Z]/g)) return this.addLetter(key)
@@ -140,6 +145,7 @@ export default class GameBoard extends HTMLElement {
   }
 
   endGame(win: boolean, intents: number) {
+    this.gameEnded = true
     this.dispatchEvent(
       new CustomEvent('end', {
         detail: { win, intents: intents + 1 }
