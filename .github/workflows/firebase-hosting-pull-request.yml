@@ -16,7 +16,12 @@ jobs:
           node-version: 16
       - name: Add firebase config
         run: >
-          echo "export default typeof ${{ secrets.FIREBASE_CONFIG }} === 'string' ? JSON.parse(${{ secrets.FIREBASE_CONFIG }}) : ${{ secrets.FIREBASE_CONFIG }}" > ./src/scripts/firebase-config.ts
+          cat << EOF > ./src/scripts/firebase-config.ts
+            const config = ${{ secrets.FIREBASE_CONFIG }}
+            const parsed = typeof config === 'string' ? JSON.parse(config) : config
+
+            export default parsed
+          EOF
       - name: Install dependencies
         run: yarn install
       - name: Build
