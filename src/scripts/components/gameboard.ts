@@ -9,8 +9,8 @@ export default class GameBoard extends HTMLElement {
   constructor(word: string) {
     super()
 
-    this.word = word
-    this.wordLeters = word.split('')
+    this.word = word.toLowerCase()
+    this.wordLeters = this.word.split('')
     
     document.addEventListener('keyup', (e) => this.onKeyPress(e))
     this.render()
@@ -60,7 +60,6 @@ export default class GameBoard extends HTMLElement {
   }
 
   onKeyBtnPress(key: string) {
-    console.log(key)
     if (key === 'backspace') return this.erase()
     if (key === 'send') return this.send()
     if (key.match(/[a-zA-Z]/g)) return this.addLetter(key)
@@ -103,7 +102,11 @@ export default class GameBoard extends HTMLElement {
         col?.classList.add('bg-green-600')
       }
 
+      this.endGame(true)
+
       return
+    } else if (row >= 5) {
+      this.endGame(false)
     }
     
     for (let valueIndex = 0; valueIndex < value.length; valueIndex++) {
@@ -130,8 +133,18 @@ export default class GameBoard extends HTMLElement {
         
         
         col?.classList.add('bg-amber-500')
+      } else {
+        this.dispatchEvent(new CustomEvent('wrongKey', { detail: val }))
       }
     }
+  }
+
+  endGame(win: boolean) {
+    this.dispatchEvent(
+      new CustomEvent('end', {
+        detail: { win }
+      })
+    )
   }
 }
 

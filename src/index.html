@@ -14,21 +14,29 @@
     <div class="wrapper container mx-auto flex flex-col w-full max-w-lg">
       <header id="header"
         class="relative flex flex-row justify-between items-center p-1 px-3 lg:px-1 h-[50px] my-auto border-b border-neutral-300 dark:border-neutral-700">
-        <button id="howToPlay" type="button" aria-label="howToPlay">
+        <button id="howToPlay" type="button" aria-label="howToPlay" class="z-30">
           <i class="ri-question-line"></i>
         </button>
-        <div class="absolute left-10 right-0 text-center">
+        <div class="absolute right-0 left-0 text-center">
           <h1 class="uppercase font-bold text-xl tiny:text-3xl sm:text-4xl tracking-wider">
             Anime Wordle
           </h1>
         </div>
+        <div class="flex flex-row gap-3 z-30">
+          <button id="reset" class="m-0" aria-label="reset" title="reset game">
+            <i class="ri-refresh-line"></i>
+          </button>
+        </div>
       </header>
-      <div id="animeName" class="flex flex-auto justify-center items-center py-10">
+      <div class="flex flex-auto justify-center items-center py-10">
         <p class="text-3xl">
-          Anime: <b>Naruto</b>
+          Anime: <b id="animeName">...</b>
         </p>
       </div>
       <main id="main" class="flex flex-auto justify-center items-center"></main>
+      <div id="answer" class="justify-center items-center text-center hidden">
+        <p>Name 🎉</p>
+      </div>
       <div id="keyboardContainer"
         class="flex flex-col container w-full max-w-lg pb-2 md:pb-5 px-2 mx-auto gap-2 align-bottom bottom-0 absolute">
       </div>
@@ -66,6 +74,9 @@
         <p class="text-md mt-5 relative ml-3 text-left">
           En cambio, si escribes "Sakura", la letra "a" se pondra verde, y las letras "u" y "r" se pondran amarillas,
           indicando que no estan en la posición correcta.
+        </p>
+        <p class="text-md mt-5 relative ml-3 text-left">
+          Para jugar de nuevo da click en el icono <i class="ri-refresh-line"></i>.
         </p>
       </div>
     </div>

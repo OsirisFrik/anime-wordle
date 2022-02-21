@@ -13,9 +13,9 @@
     "name": "Anime Wordle",
     "shortName": "AW",
     "startUrl": "./",
-    "theme": "#add8e6",
+    "theme": "#581c87",
     "generateIconOptions": {
-      "baseIcon": "./src/img/icons/icon.svg",
+      "baseIcon": "./src/img/icons/AW.svg",
       "sizes": [
         192,
         384,

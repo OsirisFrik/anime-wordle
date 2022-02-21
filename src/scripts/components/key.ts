@@ -1,5 +1,6 @@
 export default class Key extends HTMLElement {
   key: string
+  disabled = false
   
   constructor(key: string) {
     super()
@@ -12,6 +13,8 @@ export default class Key extends HTMLElement {
 
   onClick(e: MouseEvent) {
     e.preventDefault()
+
+    if (this.disabled) return
 
     this.dispatchEvent(new CustomEvent('keyClick', { detail: this.key }))
   }
@@ -28,6 +31,11 @@ export default class Key extends HTMLElement {
     } else {
       this.innerText = this.key
     }
+  }
+
+  disable() {
+    this.disabled = true
+    this.classList.add('disable', 'bg-stone-800')
   }
 }
 
