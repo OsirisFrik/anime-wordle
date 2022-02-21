@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@osirisfrik/aniapi-js": "^1.0.1",
-    "aniapi-js": "../aniapi-js/",
     "axios": "^0.26.0",
     "firebase": "^9.6.7",
     "remixicon": "^2.5.0",
