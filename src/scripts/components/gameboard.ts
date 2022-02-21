@@ -96,17 +96,17 @@ export default class GameBoard extends HTMLElement {
 
   validateInput(value: string, row: number) {
     if (this.word === value) {
-      for (let colIndex = 0; colIndex < 6; colIndex++) {
+      for (let colIndex = 0; colIndex < this.word.length; colIndex++) {
         const col = document.getElementById(`row-${row}-${colIndex}`)
 
         col?.classList.add('bg-green-600')
       }
 
-      this.endGame(true)
+      this.endGame(true, row)
 
       return
     } else if (row >= 5) {
-      this.endGame(false)
+      this.endGame(false, row)
     }
     
     for (let valueIndex = 0; valueIndex < value.length; valueIndex++) {
@@ -133,16 +133,16 @@ export default class GameBoard extends HTMLElement {
         
         
         col?.classList.add('bg-amber-500')
-      } else {
+      } else if (!this.word.includes(val)) {
         this.dispatchEvent(new CustomEvent('wrongKey', { detail: val }))
       }
     }
   }
 
-  endGame(win: boolean) {
+  endGame(win: boolean, intents: number) {
     this.dispatchEvent(
       new CustomEvent('end', {
-        detail: { win }
+        detail: { win, intents: intents + 1 }
       })
     )
   }

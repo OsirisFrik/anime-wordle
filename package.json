@@ -2,12 +2,11 @@
   "name": "anime-wordle",
   "version": "0.0.1",
   "description": "anime wordle",
-  "main": "./index.js",
   "author": "OsirisFrik",
   "license": "MIT",
   "scripts": {
     "dev": "parcel ./src/index.html --no-cache",
-    "build": "parcel build"
+    "build": "parcel build ./src/index.html --dist-dir build"
   },
   "pwaManifest": {
     "name": "Anime Wordle",
@@ -28,9 +27,11 @@
     "@osirisfrik/aniapi-js": "^1.0.1",
     "aniapi-js": "../aniapi-js/",
     "axios": "^0.26.0",
+    "firebase": "^9.6.7",
     "remixicon": "^2.5.0",
     "tailwindcss-dark-mode": "^1.1.7",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@parcel/config-default": "^2.3.2",
@@ -38,6 +39,7 @@
     "@parcel/packager-xml": "2.3.2",
     "@types/axios": "^0.14.0",
     "@types/node": "^17.0.18",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.2",
     "parcel": "^2.3.2",
     "parcel-config-pwa-manifest": "^0.1.1",
