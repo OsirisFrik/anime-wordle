@@ -20,9 +20,9 @@ jobs:
         run: >
           echo "export default typeof ${{ secrets.FIREBASE_CONFIG }} === 'string' ? JSON.parse(${{ secrets.FIREBASE_CONFIG }}) : ${{ secrets.FIREBASE_CONFIG }}" > ./src/scripts/firebase-config.ts
       - name: Install dependencies
-        run: npm ci
+        run: yarn install
       - name: Build
-        run: npm run build
+        run: yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
