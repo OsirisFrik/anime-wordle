@@ -1,10 +1,12 @@
+import { v4 as uuid } from 'uuid'
 import GameBoard from './components/gameboard'
 import Keyboard from './components/keyboard'
+import animes, { AnimeDatails } from './animes'
+import { getCharacters, Character } from './api/jikan'
 
 // css
 import 'remixicon/fonts/remixicon.css'
-import animes, { AnimeDatails } from './animes'
-import { getCharacters, Character } from './api/jikan'
+import { LogEvent, setUser } from './firebase'
 
 const main = document.getElementById('main') as HTMLElement
 const keyboardContainer = document.getElementById('keyboardContainer') as HTMLDivElement
@@ -18,7 +20,7 @@ let currentAnime: AnimeDatails
 let gameboard: GameBoard
 let keyboard: Keyboard
 
-window.onload = function init() {
+window.onload = async function init() {
   howToPlay.addEventListener('click', () => {
     modal.firstElementChild?.classList.remove('hidden')
   })
@@ -27,14 +29,33 @@ window.onload = function init() {
     modal.firstElementChild?.classList.add('hidden')
   })
 
-  resetBtn.addEventListener('click', (e: MouseEvent) => loadGame())
+  resetBtn.addEventListener('click', (e: MouseEvent) => {
+    loadGame()
+    LogEvent('restart')
+
+    if (!answer.classList.contains('hidden')) {
+      answer.classList.add('hidden')
+    }
+  })
   
   loadGame()
 
   if (!localStorage.getItem('firstPlay')) {
     modal.firstElementChild?.classList.remove('hidden')
     localStorage.setItem('firstPlay', 'true')
+    LogEvent('firstPlay')
   }
+
+  let uid = localStorage.getItem('uid')
+
+  if (!uid) {
+    uid = uuid()
+
+    localStorage.setItem('uid', uid)
+  }
+
+  await setUser(uid)
+  LogEvent('init')
 }
 
 function setAnimeName(name: string) {
@@ -57,6 +78,7 @@ async function getCharacterName(animeCharacters: Character[]): Promise<string> {
 }
 
 async function loadGame() {
+  LogEvent('loadGame')
   currentAnime = animes[randomIndex(animes.length)]
 
   setAnimeName(currentAnime.name)
@@ -84,6 +106,7 @@ async function loadGame() {
     }
 
     answer.classList.remove('hidden')
+    LogEvent('endGame', e.detail)
   })
 
   // @ts-ignore
