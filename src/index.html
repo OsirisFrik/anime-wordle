@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANIME WORDLE</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body class="dark:bg-slate-900 dark:text-neutral-100">
+  <div class="max-h-screen">
+    <div class="wrapper container mx-auto flex flex-col w-full max-w-lg">
+      <header id="header"
+        class="relative flex flex-row justify-between items-center p-1 px-3 lg:px-1 h-[50px] my-auto border-b border-neutral-300 dark:border-neutral-700">
+        <button id="howToPlay" type="button" aria-label="howToPlay">
+          <i class="ri-question-line"></i>
+        </button>
+        <div class="absolute left-10 right-0 text-center">
+          <h1 class="uppercase font-bold text-xl tiny:text-3xl sm:text-4xl tracking-wider">
+            Anime Wordle
+          </h1>
+        </div>
+      </header>
+      <div id="animeName" class="flex flex-auto justify-center items-center py-10">
+        <p class="text-3xl">
+          Anime: <b>Naruto</b>
+        </p>
+      </div>
+      <main id="main" class="flex flex-auto justify-center items-center"></main>
+      <div id="keyboardContainer"
+        class="flex flex-col container w-full max-w-lg pb-2 md:pb-5 px-2 mx-auto gap-2 align-bottom bottom-0 absolute">
+      </div>
+    </div>
+  </div>
+  <div id="modal">
+    <div class="hidden fixed inset-0 overflow-y-auto z-50" id="headlessui-dialog-8" role="dialog" aria-modal="true"
+      aria-labelledby="headlessui-dialog-title-12">
+      <div class="min-h-[var(--app-height)] text-center">
+        <div class="fixed inset-0 bg-white dark:bg-slate-800" id="headlessui-dialog-overlay-10" aria-hidden="true"></div>
+        <div
+          class="flex flex-col mx-auto w-full max-w-lg min-h-[var(--app-height)] p-6 text-left align-middle transition-all transform overflow-auto h-full inset-0 bg-white dark:bg-slate-900 text-gray-900 dark:text-neutral-100">
+          <div class="z-[110]">
+            <h3 class="text-lg font-bold leading-6 uppercase text-center" id="headlessui-dialog-title-12">
+              Cómo jugar
+              <button class="absolute top-0 right-0 m-6 p-1 ml-auto z-50" tabindex="0" id="close">
+                <span
+                  class="leading-[0.25] h-5 w-5 text-3xl text-neutral-400 block outline-none focus:outline-none">
+                  ×
+                </span>
+              </button>
+            </h3>
+          </div>
+        </div>
+        <p class="text-md mt-10 relative ml-3">
+          Adivina el nombre del personaje en 6 intentos.
+        </p>
+        <p class="text-md mt-5 relative ml-3 text-left">
+          Después de cada intento el color de las letras cambia para mostrar qué tan cerca estás de acertar la palabra.
+        </p>
+        <p class="text-md mt-5 relative ml-3 text-left">
+          Si el personaje es "Naruto", y escribes "Boruto", las letras "u, t, o" se pondrán verdes, lo que indica que estan en la
+          posición correcta
+        </p>
+        <p class="text-md mt-5 relative ml-3 text-left">
+          En cambio, si escribes "Sakura", la letra "a" se pondra verde, y las letras "u" y "r" se pondran amarillas,
+          indicando que no estan en la posición correcta.
+        </p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./scripts/index.ts"></script>
+</body>
+
+</html>
